@@ -3,10 +3,15 @@ Powerful C# Rootkit made for EdUcAtIoNaL pUrPoSeS oNlY.
 
 # Features
 ✔️ Disable windows defender.
+
 ✔️ UAC bypass.
+
 ✔️ Runpe.
+
 ✔️ Hidden startup key.
+
 ✔️ Unload SysMon (System Monitor) driver.
+
 ✔️ Disable Task Manager.
 
 # Build
