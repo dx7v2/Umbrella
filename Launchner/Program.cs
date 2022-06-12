@@ -343,19 +343,14 @@ namespace Launchner
             [Flags]
             public enum PrivilegeAttributes
             {
-                /// <summary>Privilège est désactivé.</summary>
                 Disabled = 0,
 
-                /// <summary>Privilège activé par défaut.</summary>
                 EnabledByDefault = 1,
 
-                /// <summary>Privilège est activé.</summary>
                 Enabled = 2,
 
-                /// <summary>Privilège est supprimé.</summary>
                 Removed = 4,
 
-                /// <summary>Privilège utilisé pour accéder à un objet ou un service.</summary>
                 UsedForAccess = -2147483648
             }
 
@@ -381,7 +376,6 @@ namespace Launchner
                 /// <summary>Right to enable or disable the privileges in an access token.</summary>
                 AdjustPrivileges = 32,
 
-                /// <summary>Right to adjust the attributes of the groups in an access token.</summary>
                 AdjustGroups = 64,
 
                 /// <summary>Right to change the default owner, primary group, or DACL of an access token.</summary>
@@ -495,9 +489,6 @@ namespace Launchner
             internal static extern Int32 GetLastError();
 
 
-            /**********************************************************************/
-            /*                        Fonction  MySetPrivilege                    */
-            /**********************************************************************/
             public static bool MySetPrivilege(string sPrivilege, bool enablePrivilege)
             {
                 bool blRc;
@@ -507,20 +498,15 @@ namespace Launchner
                 int retrunLength = 0;
                 IntPtr processToken = IntPtr.Zero;
 
-                /* Récupération du token du processus local
-                */
                 blRc = OpenProcessToken(GetCurrentProcess(), TokenAccessRights.AllAccess, ref processToken);
                 if (blRc == false)
                     return false;
 
-                /* Récupère le Local Unique Identificateur du privilège
-                */
+
                 blRc = LookupPrivilegeValue(null, sPrivilege, ref luid);
                 if (blRc == false)
                     return false;
 
-                /* Etabli ou enlève le privilège
-                */
                 newTP.PrivilegeCount = 1;
                 newTP.Privileges = new LUID_AND_ATTRIBUTES[64];
                 newTP.Privileges[0].Luid = luid;
